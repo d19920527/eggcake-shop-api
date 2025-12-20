@@ -1,9 +1,9 @@
-package com.example.eggcakeshopapi.entity;
+package com.example.eggcakeshopapi.repository;
 
-public class Product {
-    public Long Id;
-    public String name;
-    public Integer price;
+public class ProductRequest {
+    private  Long Id;
+    private String name;
+    private Integer price;
 
     public Long getId() {
         return Id;
