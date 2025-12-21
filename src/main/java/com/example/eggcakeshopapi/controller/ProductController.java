@@ -24,11 +24,14 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 //    GET撈出一筆資料
-    @GetMapping("/products/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-
-
+    @GetMapping("/products/{productsId}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long productsId) {
+        Product product = productService.getProductById(productsId);
+        if (product != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(product);
+        }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 

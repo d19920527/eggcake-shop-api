@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ProductDaoImpl implements ProductDao{
-//ProductDaoImpl 撰寫 資料庫SQL 語法的地方
+public class ProductDaoImpl implements ProductDao {
+    //ProductDaoImpl 撰寫 資料庫SQL 語法的地方
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -21,16 +21,24 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Product> getAllProducts() {
         String sql = "select * from product ";
-        Map<String,Object> map = new HashMap<>();
-        List<Product> productsList =namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
-
+        Map<String, Object> map = new HashMap<>();
+        List<Product> productsList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
         return productsList;
     }
 
 
     @Override
-    public Product getProductById(Integer productId) {
-        return null;
+    public Product getProductById(Long productId) {
+        String sql = "select * from product where id = :productId";
+        Map<String,Object> map = new HashMap<>();
+        map.put("productId",productId);
+        List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
+        if(productList.size()>0){
+            return productList.get(0);
+        }else {
+            return null;
+        }
+
     }
 
     @Override
@@ -39,12 +47,12 @@ public class ProductDaoImpl implements ProductDao{
     }
 
     @Override
-    public void updateProduct(Integer productId, ProductRequest productRequest) {
+    public void updateProduct(Long productId, ProductRequest productRequest) {
 
     }
 
     @Override
-    public void deleteProduct(Integer productId) {
+    public void deleteProduct(Long productId) {
 
     }
 }
