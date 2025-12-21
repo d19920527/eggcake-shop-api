@@ -13,21 +13,22 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductDao productDao;
 
-
+    //  Read查詢Product(所有)
     @Override
     public List<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
-
+    //  Read查詢Product=>ID
     @Override
     public Product getProductById(Long productId) {
         return productDao.getProductById(productId);
     }
-
+    //   creat新增Product=>ID
     @Override
-    public Integer createProduct(ProductRequest productRequest) {
-        return 0;
+    public Long createProduct(ProductRequest productRequest) {
+        return productDao.createProduct(productRequest);
     }
+
 
     @Override
     public void updateProduct(Long productId, ProductRequest productRequest) {

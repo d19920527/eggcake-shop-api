@@ -4,7 +4,10 @@ import com.example.eggcakeshopapi.entity.Product;
 import com.example.eggcakeshopapi.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -17,7 +20,7 @@ public class ProductDaoImpl implements ProductDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-
+    //  Read查詢Product(所有)
     @Override
     public List<Product> getAllProducts() {
         String sql = "select * from product ";
@@ -26,7 +29,7 @@ public class ProductDaoImpl implements ProductDao {
         return productsList;
     }
 
-
+    //  Read查詢Product=>ID
     @Override
     public Product getProductById(Long productId) {
         String sql = "select * from product where id = :productId";
@@ -40,11 +43,21 @@ public class ProductDaoImpl implements ProductDao {
         }
 
     }
-
+    //   creat新增Product=>ID
     @Override
-    public Integer createProduct(ProductRequest productRequest) {
-        return 0;
+    public Long createProduct(ProductRequest productRequest) {
+        String sql="INSERT INTO product (name,price)"+
+                "VALUES(:name,:price)";
+        Map<String,Object> map = new HashMap<>();
+        map.put("name",productRequest.getName());
+        map.put("price",productRequest.getPrice());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sql,new MapSqlParameterSource(map),keyHolder);
+        Long productId = keyHolder.getKey().longValue();
+        return productId;
     }
+
 
     @Override
     public void updateProduct(Long productId, ProductRequest productRequest) {

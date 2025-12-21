@@ -10,8 +10,8 @@ public interface ProductDao {
     List<Product> getAllProducts();
 //  查詢Product=>ID
     Product getProductById(Long productId) ;
-//   新增Product=>ID
-    Integer createProduct(ProductRequest productRequest);
+//   creat新增Product=>ID
+    Long createProduct(ProductRequest productRequest);
 //   更新Product=>ID
     void updateProduct(Long productId,ProductRequest productRequest);
 //   刪除Product=>ID
