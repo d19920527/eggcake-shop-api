@@ -23,12 +23,8 @@ public class ProductDaoImpl implements ProductDao{
         String sql = "select * from product ";
         Map<String,Object> map = new HashMap<>();
         List<Product> productsList =namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
-        if(productsList.size()>0){
-            return productsList;
-        }else {
-            return null;
-        }
 
+        return productsList;
     }
 
 

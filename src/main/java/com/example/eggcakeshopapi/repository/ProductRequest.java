@@ -1,16 +1,17 @@
 package com.example.eggcakeshopapi.repository;
 
 public class ProductRequest {
-    private  Long Id;
+    private  Long id;
     private String name;
     private Integer price;
 
+
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

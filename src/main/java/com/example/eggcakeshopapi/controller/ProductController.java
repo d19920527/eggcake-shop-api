@@ -2,13 +2,12 @@ package com.example.eggcakeshopapi.controller;
 
 
 import com.example.eggcakeshopapi.entity.Product;
-import com.example.eggcakeshopapi.repository.ProductRequest;
 import com.example.eggcakeshopapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,11 +17,19 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-//    GET撈出所有的資料
+//    GET撈出products的資料
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
+//    GET撈出一筆資料
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
 
 }

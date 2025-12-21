@@ -1,16 +1,16 @@
 package com.example.eggcakeshopapi.entity;
 
 public class Product {
-    public Long Id;
+    public Long id;
     public String name;
     public Integer price;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
