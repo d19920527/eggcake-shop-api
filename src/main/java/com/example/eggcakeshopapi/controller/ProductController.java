@@ -20,16 +20,16 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+        return ResponseEntity.status(HttpStatus.OK).body(products);//200
     }
 //    Read查詢Product單筆資料
     @GetMapping("/products/{productsId}")
     public ResponseEntity<Product> getProductById(@PathVariable Long productsId) {
         Product product = productService.getProductById(productsId);
         if (product != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(product);
+            return ResponseEntity.status(HttpStatus.OK).body(product);//200
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();//404
         }
     }
 //POST creat新增一筆新口味雞蛋糕
@@ -38,7 +38,7 @@ public class ProductController {
         Long productId = productService.createProduct(productRequest);
         Product product  = productService.getProductById(productId);
         System.out.println("新增一筆商品=>"+productId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);//201
     }
 //    put 查詢並更新口味
     @PutMapping("/products/{productsId}")
@@ -46,13 +46,18 @@ public class ProductController {
 //        檢查productsId是否存在
             Product product = productService.getProductById(productsId);
             if(product==null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();//404
             }
 //         修改productsId的數據
             productService.updateProduct(productsId,productRequest);
             Product updaateProduct = productService.getProductById(productsId);
-            return ResponseEntity.status(HttpStatus.OK).body(updaateProduct);
+            return ResponseEntity.status(HttpStatus.OK).body(updaateProduct);//200
+    }
 
+    @DeleteMapping("/products/{productsId}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable  Long productsId){
+        productService.deleteProduct(productsId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();//204
     }
 
 }
