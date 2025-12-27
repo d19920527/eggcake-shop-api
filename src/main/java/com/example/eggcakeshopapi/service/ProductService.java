@@ -1,19 +1,21 @@
 package com.example.eggcakeshopapi.service;
 
 import com.example.eggcakeshopapi.entity.Product;
-import com.example.eggcakeshopapi.repository.ProductRequest;
+import com.example.eggcakeshopapi.dto.ProductRequest;
 
 import java.util.List;
 
 public interface ProductService {
-    //  Read查詢Product(所有)
+    //  TODO-Read查詢Product(所有)
     List<Product> getAllProducts();
-    //  Read查詢Product=>ID
+    //   TODO-Read查詢Product整筆的資料有條件
+    List<Product> searchProducts(String name,Integer min,Integer max);
+    //  TODO-Read查詢Product=>ID
     Product getProductById(Long productId) ;
-    //   creat新增Product=>ID
+    //  TODO-creat新增Product=>ID
     Long createProduct(ProductRequest productRequest);
-    //   更新Product=>ID
+   //  TODO-PUT-查詢編號並更新口味
     void updateProduct(Long productId,ProductRequest productRequest);
-    //   刪除Product=>ID
+    //   TODO-刪除Product=>ID
     void deleteProduct(Long productId);
 }

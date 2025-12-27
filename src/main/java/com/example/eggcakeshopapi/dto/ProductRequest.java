@@ -1,4 +1,4 @@
-package com.example.eggcakeshopapi.repository;
+package com.example.eggcakeshopapi.dto;
 
 public class ProductRequest {
     private  Long id;
