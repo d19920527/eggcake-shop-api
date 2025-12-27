@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void updateProduct(Long productId, ProductRequest productRequest) {
-
+        productDao.updateProduct(productId, productRequest);
     }
 
     @Override

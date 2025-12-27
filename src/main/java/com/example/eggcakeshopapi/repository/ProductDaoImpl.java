@@ -2,6 +2,7 @@ package com.example.eggcakeshopapi.repository;
 
 import com.example.eggcakeshopapi.entity.Product;
 import com.example.eggcakeshopapi.rowmapper.ProductRowMapper;
+import com.example.eggcakeshopapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -61,6 +62,14 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void updateProduct(Long productId, ProductRequest productRequest) {
+        String sql = "UPDATE product SET name = :name," +
+                     "price  = :price WHERE id = :productId ";
+        Map<String,Object> map = new HashMap<>();
+        map.put("productId",productId);
+
+        map.put("name",productRequest.getName());
+        map.put("price",productRequest.getPrice());
+        namedParameterJdbcTemplate.update(sql,map);
 
     }
 

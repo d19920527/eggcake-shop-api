@@ -37,6 +37,22 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody ProductRequest  productRequest) {
         Long productId = productService.createProduct(productRequest);
         Product product  = productService.getProductById(productId);
+        System.out.println("新增一筆商品=>"+productId);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
+//    put 查詢並更新口味
+    @PutMapping("/products/{productsId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long productsId,@RequestBody ProductRequest productRequest){
+//        檢查productsId是否存在
+            Product product = productService.getProductById(productsId);
+            if(product==null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+//         修改productsId的數據
+            productService.updateProduct(productsId,productRequest);
+            Product updaateProduct = productService.getProductById(productsId);
+            return ResponseEntity.status(HttpStatus.OK).body(updaateProduct);
+
+    }
+
 }
