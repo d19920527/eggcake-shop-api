@@ -16,43 +16,16 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-/*
-    Read查詢Product整筆的資料
-
-//    @GetMapping("/products")
-//    public ResponseEntity<List<Product>> getAllProducts() {
-//        List<Product> products = productService.getAllProducts();
-//        return ResponseEntity.status(HttpStatus.OK).body(products);//200
-//    }
-//    Read查詢Product整筆的資料有條件
-//@GetMapping("/searchProducts")
-//public ResponseEntity<List<Product>> searchProducts(
-//        @RequestParam(required = false) String name,
-//        @RequestParam(required = false) Integer min,
-//        @RequestParam(required = false)Integer max
-//) {
-//    List<Product> products = productService.searchProducts(name,min,max);
-//    return ResponseEntity.status(HttpStatus.OK).body(products);//200
-//}
- */
-
+//    TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
 @GetMapping("/products")
-public ResponseEntity<List<Product>> getProducts(
+public ResponseEntity<List<Product>> searchProducts(
         @RequestParam(required = false) String name,
         @RequestParam(required = false) Integer min,
         @RequestParam(required = false) Integer max
 ) {
     List<Product> products;
-
     // 如果有帶參數，執行搜尋邏輯；沒帶參數，執行獲取全部邏輯
-    if (name == null && min == null && max == null) {
-        //TODO-Read查詢Product整筆的資料
-        products = productService.getAllProducts();
-    } else {
-        //TODO-Read查詢Product整筆的資料有條件
         products = productService.searchProducts(name, min, max);
-    }
-
     return ResponseEntity.status(HttpStatus.OK).body(products);
 }
 

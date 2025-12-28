@@ -6,9 +6,8 @@ import com.example.eggcakeshopapi.dto.ProductRequest;
 import java.util.List;
 
 public interface ProductService {
-    //  TODO-Read查詢Product(所有)
-    List<Product> getAllProducts();
-    //   TODO-Read查詢Product整筆的資料有條件
+
+    //  TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     List<Product> searchProducts(String name,Integer min,Integer max);
     //  TODO-Read查詢Product=>ID
     Product getProductById(Long productId) ;

@@ -20,15 +20,7 @@ public class ProductDaoImpl implements ProductDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    //  TODO-Read查詢Product(所有)
-    @Override
-    public List<Product> getAllProducts() {
-        String sql = "select * from product ";
-        Map<String, Object> map = new HashMap<>();
-        List<Product> productsList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
-        return productsList;
-    }
-//    TODO-Read查詢Product整筆的資料有條件
+//    TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     @Override
     public List<Product> getProducts(String name, Integer min, Integer max) {
         // 1. 在 1=1 後面加上一個空格

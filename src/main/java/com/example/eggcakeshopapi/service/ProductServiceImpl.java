@@ -13,12 +13,7 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductDao productDao;
 
-    //  TODO-Read查詢Product(所有)
-    @Override
-    public List<Product> getAllProducts() {
-        return productDao.getAllProducts();
-    }
-    //    Read查詢Product整筆的資料有條件
+    //  TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     @Override
     public List<Product> searchProducts(String name, Integer min, Integer max) {
         return productDao.getProducts(name,min,max);

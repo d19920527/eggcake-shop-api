@@ -7,9 +7,8 @@ import java.util.List;
 
 
 public interface ProductDao {
-//  TODO-查詢Product(所有)
-    List<Product> getAllProducts();
-//  TODO-Read查詢Product整筆的資料有條件
+
+//  TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     List<Product> getProducts(String name, Integer minProduct, Integer maxProduct);
 //  TODO-查詢Product=>ID
     Product getProductById(Long productId) ;
