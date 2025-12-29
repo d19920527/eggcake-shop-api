@@ -11,6 +11,18 @@ public class ApiResponse <T>{
         this.message = message;
     }
 
+    public ApiResponse(boolean success, String errorMessage) {
+        this.success =success;
+        this.message = errorMessage;
+    }
+
+    public static <T> ApiResponse<T> success(T data){
+        return  new ApiResponse<>(true,data,"success");
+    }
+    public static <T>ApiResponse<T> fail(String errorMessage){
+        return new ApiResponse<>(false,errorMessage);
+    }
+
     public boolean isSuccess() {
         return success;
     }
