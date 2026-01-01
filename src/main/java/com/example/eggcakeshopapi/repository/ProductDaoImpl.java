@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
 
     //    TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     @Override
-    public List<Product> getProducts(String name, Integer min, Integer max) throws RuntimeException {
+    public List<Product> getProducts(String name, Integer min, Integer max)  {
 
         // 1. 在 1=1 後面加上一個空格
         StringBuffer sql = new StringBuffer("SELECT * FROM Product WHERE 1=1 ");
@@ -50,7 +50,7 @@ public class ProductDaoImpl implements ProductDao {
 
     //  TODO-Read查詢Product=>ID
     @Override
-    public Product getProductById(Long productId) throws RuntimeException{
+    public Product getProductById(Long productId) {
         String sql = "select * from product where id = :productId";
         Map<String, Object> map = new HashMap<>();
         map.put("productId", productId);
@@ -65,7 +65,7 @@ public class ProductDaoImpl implements ProductDao {
 
 
     @Override
-    public Long createProduct(ProductRequest productRequest)throws RuntimeException {
+    public Long createProduct(ProductRequest productRequest) {
         String sql = "INSERT INTO product (name,price)" +
                 "VALUES(:name,:price)";
         Map<String, Object> map = new HashMap<>();
@@ -79,7 +79,7 @@ public class ProductDaoImpl implements ProductDao {
     }
     //  TODO-PUT-查詢編號並更新口味
     @Override
-    public void updateProduct(Long productId, ProductRequest productRequest) throws RuntimeException{
+    public void updateProduct(Long productId, ProductRequest productRequest){
         String sql = "UPDATE product SET name = :name," +
                 "price  = :price WHERE id = :productId ";
         Map<String, Object> map = new HashMap<>();
@@ -92,7 +92,7 @@ public class ProductDaoImpl implements ProductDao {
     }
     // TODO-刪除一筆資料
     @Override
-    public void deleteProduct(Long productId)throws RuntimeException {
+    public void deleteProduct(Long productId) {
         String sql = "DELETE FROM product WHERE ID = :productId";
         Map<String, Object> map = new HashMap<>();
         map.put("productId", productId);
