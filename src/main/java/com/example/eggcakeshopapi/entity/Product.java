@@ -1,9 +1,11 @@
 package com.example.eggcakeshopapi.entity;
 
+import java.math.BigDecimal;
+
 public class Product {
     public Long id;
     public String name;
-    public Integer price;
+    public BigDecimal price;
 
     public Long getId() {
         return id;
@@ -21,11 +23,11 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

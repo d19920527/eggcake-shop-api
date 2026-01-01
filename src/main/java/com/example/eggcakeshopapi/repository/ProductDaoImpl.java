@@ -1,5 +1,6 @@
 package com.example.eggcakeshopapi.repository;
 
+import com.example.eggcakeshopapi.dao.ProductDao;
 import com.example.eggcakeshopapi.dto.ProductRequest;
 import com.example.eggcakeshopapi.entity.Product;
 import com.example.eggcakeshopapi.rowmapper.ProductRowMapper;
@@ -10,7 +11,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,13 +1,11 @@
 package com.example.eggcakeshopapi.service;
 
 import com.example.eggcakeshopapi.entity.Product;
-import com.example.eggcakeshopapi.repository.ProductDao;
+import com.example.eggcakeshopapi.dao.ProductDao;
 import com.example.eggcakeshopapi.dto.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLClientInfoException;
-import java.sql.SQLException;
 import java.util.List;
 //ProductServiceImpl 饌寫伺服器回應的Http 協定代碼
 @Component

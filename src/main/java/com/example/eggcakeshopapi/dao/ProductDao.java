@@ -1,4 +1,4 @@
-package com.example.eggcakeshopapi.repository;
+package com.example.eggcakeshopapi.dao;
 
 import com.example.eggcakeshopapi.dto.ProductRequest;
 import com.example.eggcakeshopapi.entity.Product;
@@ -14,7 +14,7 @@ public interface ProductDao {
     Product getProductById(Long productId) ;
 //  TODO-creat新增Product=>ID
     Long createProduct(ProductRequest productRequest);
-//  TODO-PUT-查詢編號並更新口味
+//  TODO-PUT-查詢Product=>ID並更新口味
     void updateProduct(Long productId,ProductRequest productRequest);
 //  TODO-刪除Product=>ID
     void deleteProduct(Long productId);
