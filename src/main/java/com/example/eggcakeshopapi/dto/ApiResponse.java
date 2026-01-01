@@ -1,6 +1,6 @@
 package com.example.eggcakeshopapi.dto;
 
-public class ApiResponse <T>{
+public class ApiResponse <T>  {
     private boolean success;
     private T data;
     private String message;
@@ -19,7 +19,7 @@ public class ApiResponse <T>{
     public static <T> ApiResponse<T> success(T data){
         return  new ApiResponse<>(true,data,"success");
     }
-    public static <T>ApiResponse<T> fail(String errorMessage){
+    public static <T>ApiResponse<T> fail(String errorMessage) {
         return new ApiResponse<>(false,errorMessage);
     }
 

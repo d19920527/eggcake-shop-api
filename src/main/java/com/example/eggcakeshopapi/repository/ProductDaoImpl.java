@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,10 @@ public class ProductDaoImpl implements ProductDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-//    TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
+    //    TODO-Read查詢Product整筆的資料有條件(無參數&有參數皆可查詢)
     @Override
-    public List<Product> getProducts(String name, Integer min, Integer max) {
+    public List<Product> getProducts(String name, Integer min, Integer max) throws RuntimeException {
+
         // 1. 在 1=1 後面加上一個空格
         StringBuffer sql = new StringBuffer("SELECT * FROM Product WHERE 1=1 ");
         Map<String, Object> map = new HashMap<>();
@@ -43,57 +45,57 @@ public class ProductDaoImpl implements ProductDao {
             sql.append("AND price <= :maxProduct ");
             map.put("maxProduct", max);
         }
-
         return namedParameterJdbcTemplate.query(sql.toString(), map, new ProductRowMapper());
     }
+
     //  TODO-Read查詢Product=>ID
     @Override
-    public Product getProductById(Long productId) {
+    public Product getProductById(Long productId) throws RuntimeException{
         String sql = "select * from product where id = :productId";
-        Map<String,Object> map = new HashMap<>();
-        map.put("productId",productId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
-        if(productList.size()>0){
+        if (productList.size() > 0) {
             return productList.get(0);
-        }else {
+        } else {
             return null;
         }
 
     }
-    //  TODO-PUT-查詢編號並更新口味
+
+
     @Override
-    public Long createProduct(ProductRequest productRequest) {
-        String sql="INSERT INTO product (name,price)"+
+    public Long createProduct(ProductRequest productRequest)throws RuntimeException {
+        String sql = "INSERT INTO product (name,price)" +
                 "VALUES(:name,:price)";
-        Map<String,Object> map = new HashMap<>();
-        map.put("name",productRequest.getName());
-        map.put("price",productRequest.getPrice());
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", productRequest.getName());
+        map.put("price", productRequest.getPrice());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(sql,new MapSqlParameterSource(map),keyHolder);
+        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
         Long productId = keyHolder.getKey().longValue();
         return productId;
     }
-
-//    TODO-刪除一筆資料
+    //  TODO-PUT-查詢編號並更新口味
     @Override
-    public void updateProduct(Long productId, ProductRequest productRequest) {
+    public void updateProduct(Long productId, ProductRequest productRequest) throws RuntimeException{
         String sql = "UPDATE product SET name = :name," +
-                     "price  = :price WHERE id = :productId ";
-        Map<String,Object> map = new HashMap<>();
-        map.put("productId",productId);
+                "price  = :price WHERE id = :productId ";
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
 
-        map.put("name",productRequest.getName());
-        map.put("price",productRequest.getPrice());
-        namedParameterJdbcTemplate.update(sql,map);
+        map.put("name", productRequest.getName());
+        map.put("price", productRequest.getPrice());
+        namedParameterJdbcTemplate.update(sql, map);
 
     }
-
+    // TODO-刪除一筆資料
     @Override
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(Long productId)throws RuntimeException {
         String sql = "DELETE FROM product WHERE ID = :productId";
-        Map<String,Object> map = new HashMap<>();
-        map.put("productId",productId);
-        namedParameterJdbcTemplate.update(sql,map);
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+        namedParameterJdbcTemplate.update(sql, map);
     }
 }

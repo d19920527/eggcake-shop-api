@@ -36,57 +36,44 @@ public class ProductController {
     @GetMapping("/products/{productsId}")
     public ApiResponse<Product> getProductById(@PathVariable Long productsId) {
         Product product = productService.getProductById(productsId);
-
         if (product == null) {
-            try {
-                return ApiResponse.fail("Product not found");
-            } catch (RuntimeException e) {
-                throw new RuntimeException(e.getMessage());
-            }
-    }else{
+            return ApiResponse.fail("Product not found");
+        } else {
+            return ApiResponse.success(product);
+        }
+    }
+
+    // TODO-POST-Creat新增一筆新口味雞蛋糕
+    @PostMapping("/products")
+    public ApiResponse<Product> createProduct(@RequestBody ProductRequest productRequest) {
+        Long productId = productService.createProduct(productRequest);
+        Product product = productService.getProductById(productId);
         return ApiResponse.success(product);
     }
-}
 
-// TODO-POST-Creat新增一筆新口味雞蛋糕
-@PostMapping("/products")
-public ApiResponse<Product> createProduct(@RequestBody ProductRequest productRequest) {
-    Long productId = productService.createProduct(productRequest);
-    Product product = productService.getProductById(productId);
-    return ApiResponse.success(product);
-}
-
-//    TODO-PUT-查詢編號並更新口味
-@PutMapping("/products/{productsId}")
-public ApiResponse<Product> updateProduct(@PathVariable Long productsId, @RequestBody ProductRequest productRequest) {
+    //    TODO-PUT-查詢編號並更新口味
+    @PutMapping("/products/{productsId}")
+    public ApiResponse<Product> updateProduct(@PathVariable Long productsId, @RequestBody ProductRequest productRequest) {
 //        檢查productsId是否存在
-    Product product = productService.getProductById(productsId);
-    if (product == null) {
-        try {
-            return ApiResponse.fail("Product not found");
-        }catch (RuntimeException e){
-            throw  new RuntimeException(e.getMessage());
+        Product product = productService.getProductById(productsId);
+        if (product == null) {
+                return ApiResponse.fail("Product not found");
         }
-    }
 //         修改productsId的數據
-    productService.updateProduct(productsId, productRequest);
-    Product updaateProduct = productService.getProductById(productsId);
-    return ApiResponse.success(updaateProduct);
-}
-
-//    TODO-DELETE-刪除一筆資料
-@DeleteMapping("/products/{productsId}")
-public ApiResponse<Product> deleteProduct(@PathVariable Long productsId) {
-    Product product = productService.getProductById(productsId);
-    if (product == null) {
-        try {
-            return ApiResponse.fail("Product not found");
-        }catch (RuntimeException e){
-            throw  new RuntimeException(e.getMessage());
-        }
+        productService.updateProduct(productsId, productRequest);
+        Product updaateProduct = productService.getProductById(productsId);
+        return ApiResponse.success(updaateProduct);
     }
-    productService.deleteProduct(productsId);
-    return ApiResponse.success(product);
-}
+
+    //    TODO-DELETE-刪除一筆資料
+    @DeleteMapping("/products/{productsId}")
+    public ApiResponse<Product> deleteProduct(@PathVariable Long productsId) {
+        Product product = productService.getProductById(productsId);
+        if (product == null) {
+                return ApiResponse.fail("Product not found");
+        }
+        productService.deleteProduct(productsId);
+        return ApiResponse.success(product);
+    }
 
 }
